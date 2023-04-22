@@ -1,0 +1,78 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-argocd-apps
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: my-namespace
+  project: default
+  source:
+    repoURL: https://github.com/my-org/my-repo.git
+    path: ./
+    targetRevision: HEAD
+    directory:
+      recurse: true
+      jsonnet: {}
+      ksonnet: {}
+      helm: {}
+      kustomize:
+        nameSuffix: "-kustomize"
+        commonLabels:
+          app: my-argocd-apps
+    # Define the list of applications you want to deploy
+    applications:
+    - name: tekton-node-app
+      project: tekton-node-app
+      source:
+        path: tekton-node-app
+        kustomize:
+          path: overlays/dev
+      # Define the list of environments for the application
+      destinations:
+      - server: https://kubernetes.default.svc
+        namespace: dev
+        name: tekton-node-app-dev
+        namespace: tekton-node-app
+        kustomize:
+          nameSuffix: "-dev"
+          commonLabels:
+            app: tekton-node-app
+            env: dev
+      - server: https://kubernetes.default.svc
+        namespace: qa
+        name: tekton-node-app-qa
+        namespace: tekton-node-app
+        kustomize:
+          nameSuffix: "-qa"
+          commonLabels:
+            app: tekton-node-app
+            env: qa
+    # - name: tekton-flask-app
+    #   project: tekton-flask-app
+    #   source:
+    #     path: tekton-flask-app
+    #     kustomize:
+    #       path: overlays/dev
+    #   # Define the list of environments for the application
+    #   destinations:
+    #   - server: https://kubernetes.default.svc
+    #     namespace: dev
+    #     name: tekton-flask-app-dev
+    #     namespace: tekton-flask-app
+    #     kustomize:
+    #       nameSuffix: "-dev"
+    #       commonLabels:
+    #         app: tekton-flask-app
+    #         env: dev
+    #   - server: https://kubernetes.default.svc
+    #     namespace: qa
+    #     name: tekton-flask-app-qa
+    #     namespace: tekton-flask-app
+    #     kustomize:
+    #       nameSuffix: "-qa"
+    #       commonLabels:
+    #         app: tekton-flask-app
+    #         env: qa
+    # Define additional applications as needed

@@ -1,3 +1,6 @@
+### Folder Structure
+
+```yaml
 tekton-node-app
 ├── base
 │   ├── deployment.yaml
@@ -11,3 +14,4 @@ tekton-node-app
     └── qa
         ├── kustomization.yaml
         └── deployment-patch.yaml
+```
