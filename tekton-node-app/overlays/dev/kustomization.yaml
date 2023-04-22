@@ -1,5 +1,9 @@
 namePrefix: dev-
+namespace: dev
 bases:
   - ../../base
+imageTags:
+  - name: limarktest/tekton-nodejs
+    newTag: latest
 patchesStrategicMerge:
   - deployment-patch.yaml

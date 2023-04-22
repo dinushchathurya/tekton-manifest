@@ -1,8 +1,4 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-app-deployment
-template:
-  spec:
-    containers:
-      image: limarktest/tekton-nodejs:latest
+  name: knote

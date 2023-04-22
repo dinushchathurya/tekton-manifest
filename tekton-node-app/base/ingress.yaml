@@ -14,6 +14,6 @@ spec:
           path: /
           backend:
             service:
-              name: node-app-service
+              name: knote
               port:
                 number: 80

@@ -1,5 +1,10 @@
-namePrefix: qa-
+namePrefix: prod-
+namespace: prod
 bases:
   - ../../base
+imageTags:
+  - name: limarktest/tekton-nodejs
+    newTag: latest
 patchesStrategicMerge:
   - deployment-patch.yaml
+  - service-patch.yaml
