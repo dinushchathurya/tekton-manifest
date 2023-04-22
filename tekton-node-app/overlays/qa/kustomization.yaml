@@ -1,4 +1,4 @@
-namePrefix: dev-
+namePrefix: qa-
 bases:
   - ../../base
 patchesStrategicMerge:
