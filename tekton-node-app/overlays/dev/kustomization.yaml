@@ -4,6 +4,6 @@ bases:
   - ../../base
 imageTags:
   - name: limarktest/tekton-nodejs
-    newTag: latest
+    newTag: vv1.0.0
 patchesStrategicMerge:
   - deployment-patch.yaml
