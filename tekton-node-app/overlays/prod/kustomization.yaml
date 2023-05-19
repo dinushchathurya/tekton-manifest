@@ -7,4 +7,3 @@ imageTags:
     newTag: be42ab1dcd0622273d0f5e3dbf0b472bab315a3f
 patchesStrategicMerge:
   - deployment-patch.yaml
-  - service-patch.yaml
