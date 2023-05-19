@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: tekton-node-app
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - overlay: dev
+        gitRepo: git@github.com:dinushchathurya/tekton-manifest.git ### https://github.com/dinushchathurya/tekton-manifest.git
+        appPath: tekton-node-app/overlays
+        appBranch: master
+      - overlay: prod
+        gitRepo: git@github.com:dinushchathurya/tekton-manifest.git ### https://github.com/dinushchathurya/tekton-manifest.git
+        appPath: tekton-node-app/overlays
+        appBranch: master
+  template:
+    metadata:
+      name: 'tekton-node-app-{{overlay}}'
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - PruneLast=true
+          - Validate=false
+          - CreateNamespace=true
+      source:
+        repoURL: '{{gitRepo}}'
+        targetRevision: '{{appBranch}}'
+        path: '{{appPath}}/{{overlay}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'tekton-node-app{{overlay}}'
