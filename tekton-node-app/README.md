@@ -15,3 +15,9 @@ tekton-node-app
         ├── kustomization.yaml
         └── deployment-patch.yaml
 ```
+
+### To deploy this application
+
+```bash
+kubectl create -f application-setup.yaml
+```
