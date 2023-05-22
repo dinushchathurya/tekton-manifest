@@ -4,7 +4,7 @@ bases:
   - ../../base
 imageTags:
   - name: limarktest/tekton-nodejs
-    newTag: 4c971665273feab50f4fc2dc78ed4441073e5bd9
+    newTag: f7d647247c0eaa78ad9d86fb2dd3a7b9d4891934
 patchesStrategicMerge:
   - deployment-patch.yaml
   - service-patch.yaml
